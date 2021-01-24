@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/natsumework/laravel-cache-manager.svg?style=flat-square)](https://packagist.org/packages/natsumework/laravel-cache-manager)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Total Downloads](https://img.shields.io/packagist/dt/natsumework/laravel-cache-manager.svg?style=flat-square)](https://packagist.org/packages/natsumework/laravel-notification-mitake)
+[![Total Downloads](https://img.shields.io/packagist/dt/natsumework/laravel-cache-manager.svg?style=flat-square)](https://packagist.org/packages/natsumework/laravel-cache-manager)
 
 Allows you to easily manage the cache with config file. And provide a simple solution to solve the cache penetration and hotspot invalid.
 

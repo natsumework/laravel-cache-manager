@@ -1,0 +1,11 @@
+/build
+/vendor
+/node_modules
+composer.lock
+composer.phar
+phpunit.xml
+/.idea
+/.vscode
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log

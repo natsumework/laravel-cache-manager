@@ -180,7 +180,7 @@ class CacheManager
             throw new TypeNotDefinedException('Type ' . $type . ' not defined in cache-manager config...');
         }
 
-        $key = $type . (is_null($index) ?: ':' . $index);
+        $key = $type . (is_null($index) ? '' : ':' . $index);
 
         return $key;
     }

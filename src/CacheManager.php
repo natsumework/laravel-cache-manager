@@ -58,6 +58,7 @@ class CacheManager
      * @return mixed
      * @throws TypeNotDefinedException
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \Throwable
      */
     public function remember($type, $index = null, \Closure $callback = null)
     {
@@ -70,10 +71,13 @@ class CacheManager
         if ($this->hotspotProtectionEnabled($type)) {
             $hotspotProtectionTtl = $this->getHotspotProtectionTtl($type);
             $lockKey = $this->getHotspotProtectionKey($type, $index);
+
             $lock = Cache::store($this->store)
                 ->lock($lockKey, $hotspotProtectionTtl);
 
-            if ($lock->get()) {
+            try {
+                $lock->block($hotspotProtectionTtl);
+
                 $value = $this->get($type, $index);
 
                 if (is_null($value)) {
@@ -81,7 +85,9 @@ class CacheManager
 
                     $this->put($type, $index, $value);
                 }
-
+            } catch (\Throwable $e) {
+                throw $e;
+            } finally {
                 $lock->release();
             }
         } else {

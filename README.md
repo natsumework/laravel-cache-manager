@@ -1,6 +1,7 @@
 # Easily manage your cache for laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/natsumework/laravel-cache-manager.svg?style=flat-square)](https://packagist.org/packages/natsumework/laravel-cache-manager)
+![Test Status](https://img.shields.io/github/workflow/status/natsumework/laravel-cache-manager/run-tests?label=tests&style=flat-square)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/natsumework/laravel-cache-manager.svg?style=flat-square)](https://packagist.org/packages/natsumework/laravel-cache-manager)
 

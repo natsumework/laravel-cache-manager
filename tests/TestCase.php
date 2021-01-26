@@ -2,6 +2,7 @@
 
 namespace Natsumework\CacheManager\Tests;
 
+use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
 use Natsumework\CacheManager\CacheManager;
 use Natsumework\CacheManager\Exceptions\TypeNotDefinedException;
@@ -309,21 +310,46 @@ abstract class TestCase extends BaseTestCase
         $start = time();
 
         $cacheManager->remember('hotspot_protection_item_test', $start, function () use ($start, $config) {
-            sleep(1); // prevent timeout
-
+            $config['types']['hotspot_protection_item_test']['hotspot_protection_ttl'] -= 2;
             $cacheManager = new CacheManager($config);
-            $cacheManager->remember('hotspot_protection_item_test', $start, function () {
-                return 2;
-            });
+
+            try {
+                $cacheManager->remember('hotspot_protection_item_test', $start, function () {
+                    return 2;
+                });
+            } catch (LockTimeoutException $e) {
+
+            }
 
             return 1;
         });
 
         $end = time();
         $this->assertGreaterThan(
-            $config['types']['hotspot_protection_item_test']['hotspot_protection_ttl'] - 2,
+            $config['types']['hotspot_protection_item_test']['hotspot_protection_ttl'] - 3,
             $end - $start
         );
+    }
+
+    public function test_hotspot_protection_lock_timeout()
+    {
+        $cacheManager = $this->cacheManager;
+        $config = $this->getConfig();
+
+        // if hotspot protection is enabled, subsequent requests will be block
+        $start = time();
+
+        $this->expectException(LockTimeoutException::class);
+        $cacheManager->remember('hotspot_protection_item_test', $start, function () use ($start, $config) {
+            $config['types']['hotspot_protection_item_test']['hotspot_protection_ttl'] -= 2;
+            $cacheManager = new CacheManager($config);
+
+            $cacheManager->remember('hotspot_protection_item_test', $start, function () {
+                return 2;
+            });
+
+            return 1;
+        });
     }
 
     public function test_hotspot_protection_locker_key()

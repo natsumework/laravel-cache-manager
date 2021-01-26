@@ -88,7 +88,7 @@ class CacheManager
             } catch (\Throwable $e) {
                 throw $e;
             } finally {
-                $lock->release();
+                optional($lock)->release();
             }
         } else {
             $value = $callback();

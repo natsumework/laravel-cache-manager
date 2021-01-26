@@ -40,7 +40,7 @@ jobs:
                     extensions: curl, mbstring, zip, pdo, sqlite, pdo_sqlite, redis
                     coverage: none
 
-            - name: Start Redis
+            -   name: Start Redis
                 uses: supercharge/redis-github-action@1.2.0
                 with:
                     redis-version: ${{ matrix.redis-version }}

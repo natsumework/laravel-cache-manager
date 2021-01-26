@@ -11,6 +11,7 @@ jobs:
                 os: [ubuntu-latest]
                 php: [7.3, 7.4, 8.0]
                 laravel: [8.*, 7.*, 6.*]
+                redis-version: [6]
                 dependency-version: [prefer-lowest, prefer-stable]
                 include:
                     -   laravel: 8.*
@@ -36,8 +37,13 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php }}
-                    extensions: curl, mbstring, zip, pdo, sqlite, pdo_sqlite
+                    extensions: curl, mbstring, zip, pdo, sqlite, pdo_sqlite, redis
                     coverage: none
+
+            - name: Start Redis
+                uses: supercharge/redis-github-action@1.2.0
+                with:
+                  redis-version: ${{ matrix.redis-version }}
 
             -   name: Install dependencies
                 run: |

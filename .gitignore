@@ -3,7 +3,6 @@ vendor
 node_modules
 composer.lock
 composer.phar
-phpunit.xml
 .idea
 .vscode
 .phpunit.result.cache

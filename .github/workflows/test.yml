@@ -9,11 +9,17 @@ jobs:
             fail-fast: false
             matrix:
                 os: [ubuntu-latest]
-                php: [7.3, 7.4, 8.0]
-                laravel: [8.*, 7.*, 6.*]
-                redis-version: [6]
+                php: [7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
+                laravel: [11.*, 10.*, 9.*, 8.*, 7.*, 6.*]
+                redis-version: [6, 7]
                 dependency-version: [prefer-lowest, prefer-stable]
                 include:
+                    -   laravel: 11.*
+                        testbench: 9.*
+                    -   laravel: 10.*
+                        testbench: 8.*
+                    -   laravel: 9.*
+                        testbench: 7.*
                     -   laravel: 8.*
                         testbench: 6.*
                     -   laravel: 7.*

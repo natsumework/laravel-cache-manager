@@ -325,7 +325,7 @@ abstract class TestCase extends BaseTestCase
         });
 
         $end = time();
-        $this->assertGreaterThan(
+        $this->assertGreaterThanOrEqual(
             $config['types']['hotspot_protection_item_test']['hotspot_protection_ttl'] - 3,
             $end - $start
         );

@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-cache-manager` will be documented in this file.
 
+## 1.2.1 - 2026-10-15
+- Fix CI and flaky timing test
+
 ## 1.2.0 - 2026-10-15
 - Support Laravel 12
 
